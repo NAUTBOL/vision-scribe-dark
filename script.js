@@ -13,10 +13,10 @@ class OCRExtractor {
         this.extractedText = document.getElementById('extractedText');
         this.copyBtn = document.getElementById('copyBtn');
         this.themeToggle = document.getElementById('themeToggle');
-        
+
         this.selectedFile = null;
         this.isProcessing = false;
-        
+
         this.initializeTheme();
         this.bindEvents();
     }
@@ -28,32 +28,30 @@ class OCRExtractor {
     }
 
     bindEvents() {
-        // Theme toggle
-        this.themeToggle.addEventListener('click', () => this.toggleTheme());
-        
         // File upload events
         this.uploadArea.addEventListener('click', () => this.imageInput.click());
         this.uploadArea.addEventListener('dragover', (e) => this.handleDragOver(e));
         this.uploadArea.addEventListener('dragleave', (e) => this.handleDragLeave(e));
         this.uploadArea.addEventListener('drop', (e) => this.handleDrop(e));
         this.imageInput.addEventListener('change', (e) => this.handleFileSelect(e));
-        
+
         // OCR button
         this.ocrBtn.addEventListener('click', () => this.startOCR());
-        
+
         // Copy button
         this.copyBtn.addEventListener('click', () => this.copyText());
-        
+
         // Donate button (placeholder)
         document.querySelector('.donate-btn').addEventListener('click', () => {
-            alert('Thank you for your interest in donating! This is a demo application.');
+            const paypalLink = 'https://www.paypal.com/paypalme/NAUTBOL';
+            window.open(paypalLink, '_blank');
         });
     }
 
     toggleTheme() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
+
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
     }
@@ -71,7 +69,7 @@ class OCRExtractor {
     handleDrop(e) {
         e.preventDefault();
         this.uploadArea.classList.remove('dragover');
-        
+
         const files = e.dataTransfer.files;
         if (files.length > 0) {
             this.processFile(files[0]);
@@ -104,19 +102,19 @@ class OCRExtractor {
 
     displayPreview(file) {
         const reader = new FileReader();
-        
+
         reader.onload = (e) => {
             this.previewImage.src = e.target.result;
             this.previewSection.style.display = 'block';
             this.hideOtherSections();
-            
+
             // Scroll to preview
-            this.previewSection.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start' 
+            this.previewSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
         };
-        
+
         reader.readAsDataURL(file);
     }
 
@@ -138,34 +136,29 @@ class OCRExtractor {
             </svg>
             Processing...
         `;
-        
+
         // Show progress section
         this.progressSection.style.display = 'block';
         this.resultsSection.style.display = 'none';
-        
+
         // Scroll to progress
-        this.progressSection.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
+        this.progressSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
         });
 
         try {
             console.log('Starting OCR process...');
             const worker = await Tesseract.createWorker('eng');
             console.log('Worker created successfully');
-            
-            const { data: { text } } = await worker.recognize(this.selectedFile, {
-                logger: (m) => {
-                    console.log('OCR Progress:', m);
-                    this.updateProgress(m);
-                }
-            });
-            
+
+            const { data: { text } } = await worker.recognize(this.selectedFile);
+
             console.log('OCR completed, extracted text:', text);
             await worker.terminate();
-            
+
             this.displayResults(text);
-            
+
         } catch (error) {
             console.error('OCR Error:', error);
             alert('An error occurred during text extraction. Please try again with a smaller image or different format.');
@@ -189,11 +182,11 @@ class OCRExtractor {
         this.extractedText.value = text || 'No text was detected in the image.';
         this.progressSection.style.display = 'none';
         this.resultsSection.style.display = 'block';
-        
+
         // Scroll to results
-        this.resultsSection.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
+        this.resultsSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
         });
     }
 
@@ -211,7 +204,7 @@ class OCRExtractor {
     async copyText() {
         try {
             await navigator.clipboard.writeText(this.extractedText.value);
-            
+
             // Visual feedback
             const originalText = this.copyBtn.innerHTML;
             this.copyBtn.innerHTML = `
@@ -221,19 +214,19 @@ class OCRExtractor {
                 Copied!
             `;
             this.copyBtn.style.color = 'var(--success)';
-            
+
             setTimeout(() => {
                 this.copyBtn.innerHTML = originalText;
                 this.copyBtn.style.color = '';
             }, 2000);
-            
+
         } catch (err) {
             console.error('Failed to copy text:', err);
-            
+
             // Fallback: select text
             this.extractedText.select();
             this.extractedText.setSelectionRange(0, 99999);
-            
+
             try {
                 document.execCommand('copy');
                 alert('Text copied to clipboard!');
