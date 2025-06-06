@@ -1,110 +1,128 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OCR Text Extractor</title>
-    <meta name="description" content="Extract text from images using OCR technology" />
-    <meta name="author" content="OCR Extractor" />
-    
-    <!-- Google Fonts - Montserrat -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tesseract.js CDN -->
-    <script src="https://unpkg.com/tesseract.js@v5.0.0/dist/tesseract.min.js"></script>
-    
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <!-- Fixed Header -->
-    <header class="header">
-      <div class="container">
-        <div class="header-content">
-          <div class="logo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-              <circle cx="12" cy="13" r="3"/>
-            </svg>
-            <span>OCR Extractor</span>
-          </div>
-          
-          <div class="header-actions">
-            <button class="donate-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
-              Donate
-            </button>
-          </div>
-        </div>
-      </div>
-    </header>
 
-    <!-- Main Content -->
-    <main class="main">
-      <div class="container">
-        <div class="hero">
-          <h1>Extract Text from Images</h1>
-          <p>Upload an image and extract text using advanced OCR technology</p>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WS27J423F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-6WS27J423F');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OCR Text Extractor</title>
+  <meta name="description" content="Extract text from images using OCR technology" />
+  <meta name="author" content="OCR Extractor" />
+
+  <!-- Google Fonts - Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tesseract.js CDN -->
+  <script src="https://unpkg.com/tesseract.js@v5.0.0/dist/tesseract.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Fixed Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+            <circle cx="12" cy="13" r="3" />
+          </svg>
+          <span>OCR Extractor</span>
         </div>
 
-        <!-- Upload Section -->
-        <div class="upload-section">
-          <div class="upload-area" id="uploadArea">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7,10 12,15 17,10"/>
-              <line x1="12" x2="12" y1="15" y2="3"/>
+        <div class="header-actions">
+          <button class="donate-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
             </svg>
-            <h3>Upload Image</h3>
-            <p>Drop your image here or click to browse</p>
-            <input type="file" id="imageInput" accept="image/jpeg,image/jpg,image/png" hidden>
-          </div>
-        </div>
-
-        <!-- Preview Section -->
-        <div class="preview-section" id="previewSection" style="display: none;">
-          <h2>Image Preview</h2>
-          <div class="image-preview">
-            <img id="previewImage" alt="Preview">
-          </div>
-          <button class="ocr-btn" id="ocrBtn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-              <circle cx="12" cy="13" r="3"/>
-            </svg>
-            Extract Text
+            Donate
           </button>
         </div>
+      </div>
+    </div>
+  </header>
 
-        <!-- Progress Section -->
-        <div class="progress-section" id="progressSection" style="display: none;">
-          <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-          </div>
-          <p id="progressText">Processing image...</p>
-        </div>
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+      <div class="hero">
+        <h1>Extract Text from Images</h1>
+        <p>Upload an image and extract text using advanced OCR technology</p>
+      </div>
 
-        <!-- Results Section -->
-        <div class="results-section" id="resultsSection" style="display: none;">
-          <h2>Extracted Text</h2>
-          <div class="text-output">
-            <textarea id="extractedText" readonly placeholder="Extracted text will appear here..."></textarea>
-            <button class="copy-btn" id="copyBtn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-              </svg>
-              Copy Text
-            </button>
-          </div>
+      <!-- Upload Section -->
+      <div class="upload-section">
+        <div class="upload-area" id="uploadArea">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7,10 12,15 17,10" />
+            <line x1="12" x2="12" y1="15" y2="3" />
+          </svg>
+          <h3>Upload Image</h3>
+          <p>Drop your image here or click to browse</p>
+          <input type="file" id="imageInput" accept="image/jpeg,image/jpg,image/png" hidden>
         </div>
       </div>
-    </main>
 
-    <script src="/script.js"></script>
-  </body>
+      <!-- Preview Section -->
+      <div class="preview-section" id="previewSection" style="display: none;">
+        <h2>Image Preview</h2>
+        <div class="image-preview">
+          <img id="previewImage" alt="Preview">
+        </div>
+        <button class="ocr-btn" id="ocrBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+            <circle cx="12" cy="13" r="3" />
+          </svg>
+          Extract Text
+        </button>
+      </div>
+
+      <!-- Progress Section -->
+      <div class="progress-section" id="progressSection" style="display: none;">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p id="progressText">Processing image...</p>
+      </div>
+
+      <!-- Results Section -->
+      <div class="results-section" id="resultsSection" style="display: none;">
+        <h2>Extracted Text</h2>
+        <div class="text-output">
+          <textarea id="extractedText" readonly placeholder="Extracted text will appear here..."></textarea>
+          <button class="copy-btn" id="copyBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+            </svg>
+            Copy Text
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/script.js"></script>
+</body>
+
 </html>
