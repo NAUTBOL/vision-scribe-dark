@@ -150,20 +150,25 @@ class OCRExtractor {
         });
 
         try {
+            console.log('Starting OCR process...');
             const worker = await Tesseract.createWorker('eng');
+            console.log('Worker created successfully');
             
-            await worker.recognize(this.selectedFile, {
-                logger: (m) => this.updateProgress(m)
+            const { data: { text } } = await worker.recognize(this.selectedFile, {
+                logger: (m) => {
+                    console.log('OCR Progress:', m);
+                    this.updateProgress(m);
+                }
             });
             
-            const { data: { text } } = await worker.recognize(this.selectedFile);
+            console.log('OCR completed, extracted text:', text);
             await worker.terminate();
             
             this.displayResults(text);
             
         } catch (error) {
             console.error('OCR Error:', error);
-            alert('An error occurred during text extraction. Please try again.');
+            alert('An error occurred during text extraction. Please try again with a smaller image or different format.');
         } finally {
             this.isProcessing = false;
             this.resetOCRButton();
