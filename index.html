@@ -13,9 +13,9 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OCR Text Extractor</title>
+  <title>Text Extractor</title>
   <meta name="description" content="Extract text from images using OCR technology" />
-  <meta name="author" content="OCR Extractor" />
+  <meta name="author" content="Text Extractor" />
 
   <!-- Google Fonts - Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +40,7 @@
             <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
             <circle cx="12" cy="13" r="3" />
           </svg>
-          <span>OCR Extractor</span>
+          <span>Text Extractor</span>
         </div>
 
         <div class="header-actions">
@@ -52,9 +52,40 @@
             </svg>
             Donate
           </button>
+
+            <button class="more-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              More Apps
+            </button>
+
         </div>
       </div>
     </div>
+
+    <style>
+      #extractedText {
+        overflow: auto;
+        /* sigue siendo scrolleable */
+
+        /* Oculta scrollbar en Chrome, Edge y Safari */
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE y Edge antiguos */
+      }
+
+      /* Oculta scrollbar en WebKit (Chrome, Safari) */
+      #extractedText::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+
   </header>
 
   <!-- Main Content -->
@@ -62,7 +93,7 @@
     <div class="container">
       <div class="hero">
         <h1>Extract Text from Images</h1>
-        <p>Upload an image and extract text using advanced OCR technology</p>
+        <p>Upload an image and extract text using advanced optical character recognition technology.</p>
       </div>
 
       <!-- Upload Section -->

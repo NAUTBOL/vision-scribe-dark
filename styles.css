@@ -1,4 +1,3 @@
-
 /* CSS Variables for Theme Management */
 :root {
   --bg-primary: #000000;
@@ -86,7 +85,9 @@ body {
   gap: 1rem;
 }
 
-.donate-btn, .theme-toggle {
+.donate-btn,
+.more-btn,
+.theme-toggle {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -101,7 +102,9 @@ body {
   transition: all 0.2s ease;
 }
 
-.donate-btn:hover, .theme-toggle:hover {
+.donate-btn:hover,
+.more-btn,
+.theme-toggle:hover {
   background-color: var(--bg-tertiary);
   border-color: var(--accent);
 }
@@ -209,7 +212,8 @@ body {
 }
 
 /* Preview Section */
-.preview-section, .results-section {
+.preview-section,
+.results-section {
   background-color: var(--bg-secondary);
   border-radius: 1rem;
   padding: 2rem;
@@ -217,7 +221,8 @@ body {
   border: 1px solid var(--border);
 }
 
-.preview-section h2, .results-section h2 {
+.preview-section h2,
+.results-section h2 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
@@ -346,41 +351,45 @@ body {
   .container {
     padding: 0 1rem;
   }
-  
+
   .header-content {
     height: 56px;
   }
-  
+
   .main {
     margin-top: 56px;
     padding: 1rem 0;
   }
-  
+
   .hero {
     padding: 2rem 0;
   }
-  
+
   .hero h1 {
     font-size: 2rem;
   }
-  
+
   .hero p {
     font-size: 1rem;
   }
-  
+
   .upload-area {
     padding: 2rem 1rem;
   }
-  
-  .preview-section, .results-section, .progress-section {
+
+  .preview-section,
+  .results-section,
+  .progress-section {
     padding: 1.5rem;
   }
-  
+
   .header-actions {
     gap: 0.5rem;
   }
-  
-  .donate-btn span {
+
+  .donate-btn,
+  .more-btn,
+  span {
     display: none;
   }
 }
@@ -389,8 +398,9 @@ body {
   .logo span {
     display: none;
   }
-  
-  .donate-btn {
+
+  .donate-btn,
+  .more-btn {
     padding: 0.5rem;
   }
 }
@@ -401,13 +411,16 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.preview-section, .results-section, .progress-section {
+.preview-section,
+.results-section,
+.progress-section {
   animation: fadeIn 0.5s ease;
 }
 

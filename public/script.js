@@ -46,6 +46,11 @@ class OCRExtractor {
             const paypalLink = 'https://www.paypal.com/paypalme/NAUTBOL';
             window.open(paypalLink, '_blank');
         });
+
+        document.querySelector('.more-btn').addEventListener('click', () => {
+            const paypalLink = 'https://www.kuantyk.com';
+            window.open(paypalLink, '_blank');
+        });
     }
 
     toggleTheme() {
@@ -211,7 +216,7 @@ class OCRExtractor {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="20,6 9,17 4,12"/>
                 </svg>
-                Copied!
+                Copied
             `;
             this.copyBtn.style.color = 'var(--success)';
 
@@ -229,7 +234,7 @@ class OCRExtractor {
 
             try {
                 document.execCommand('copy');
-                alert('Text copied to clipboard!');
+                alert('Text copied to clipboard');
             } catch (e) {
                 alert('Failed to copy text. Please select and copy manually.');
             }
